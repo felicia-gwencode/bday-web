@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dear Appi - Scrapbook Flipbook</title>
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/4.1.0/turn.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Patrick Hand', cursive;
+      background-color: #fff7f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .flipbook {
+      width: 800px;
+      height: 500px;
+    }
+
+    .page {
+      background: #fff7f9;
+      background-image: radial-gradient(#fce4ec 1px, transparent 1px);
+      background-size: 30px 30px;
+      padding: 40px 30px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 10px;
+    }
+
+    .note {
+      background: #fff;
+      padding: 20px 25px;
+      border-radius: 10px;
+      box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+      transform: rotate(-1.5deg);
+      max-width: 90%;
+      margin: 0 auto;
+    }
+
+    .note h2 {
+      margin-top: 0;
+      font-size: 1.5rem;
+    }
+
+    .note ul {
+      padding-left: 20px;
+    }
+
+    .galeri {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 10px;
+    }
+
+    .galeri img {
+      width: 140px;
+      border-radius: 10px;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+      transform: rotate(-1deg);
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .galeri img:hover {
+      transform: scale(1.1) rotate(0deg);
+    }
+
+    /* Zoom overlay */
+    .zoom-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .zoom-overlay img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+
+    audio {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="flipbook">
+    <div class="page">
+      <div class="note">
+        <h2>💌 happy b'day, appii!</h2>
+        <p>
+          Selamat ulang tahun sayang, u'r getting older today. and im so grateful that you exist. 🥳<br /><br />
+          I want to thank you untuk segala kasih yang kamu beri, even im not perfect by any means but i want to be perfect for u. i hope u know that everytime i say I LOVE U i mean it. Untuk hari kamu dilahirkan, utk hari kamu tumbuh, aku harap kamu mendapat ulang tahun terbaik yang pernah ada karna, ada aku didalamnya. aku senang bisa kenal kamu, sayang.  <br /><br />
+          here things i wanna say to u
+        </p>
+        <ul>
+          <li>i love u</li>
+          <li>i love u</li>
+          <li>i love u sayangku, cintaku, appiku, punya aku.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="page">
+      <div class="galeri">
+        <img src="cupon.jpg" alt="cupon" class="zoomable">
+        <img src="fav%20message.png" alt="fav message" class="zoomable">
+      </div>
+      <div class="voice">
+        <p>🎧 Voice note dari aku:</p>
+        <audio controls>
+          <source src="voice.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    </div>
+  </div>
+
+  <!-- Zoom overlay -->
+  <div class="zoom-overlay" id="zoomOverlay">
+    <img src="" alt="zoomed" id="zoomImage">
+  </div>
+
+  <script>
+    $(document).ready(function(){
+      $('.flipbook').turn({
+        width: 800,
+        height: 500,
+        autoCenter: true
+      });
+
+      // Zoom effect
+      $('.zoomable').on('click', function() {
+        var src = $(this).attr('src');
+        $('#zoomImage').attr('src', src);
+        $('#zoomOverlay').fadeIn();
+      });
+
+      $('#zoomOverlay').on('click', function() {
+        $(this).fadeOut();
+      });
+    });
+  </script>
+</body>
+</html>
+
